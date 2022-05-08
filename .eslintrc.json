@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "react-app", 
+    "react-app/jest", 
+    "next/babel",
+    "next/core-web-vitals",
+    "prettier"
+  ]
 }

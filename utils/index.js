@@ -1,0 +1,1 @@
+export { formatSentence } from './helpers';
