@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import Web3 from 'web3';
 import { ToggleButtonGroup, ToggleButton, Button } from '@mui/material';
+import { NavBar } from '../components';
 
-const Title = styled.h1`
+const Title = styled.h3`
   font-size: 4rem;
   margin-y: 15rem;
   text-align: center;
@@ -31,6 +33,9 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  button {
+    margin: 0 10px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -39,9 +44,9 @@ const ImageContainer = styled.div`
 `;
 
 const Footer = styled.div`
+  position: fixed;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -63,10 +68,8 @@ export default function Home() {
   const imageRef = useRef();
 
   const getWords = async () => {
-    setLoading(true);
     const data = ['Cat', 'Dog', 'Baby', 'Cat'];
     setWords(data);
-    setLoading(false);
   };
 
   const getImage = () => {
@@ -91,6 +94,27 @@ export default function Home() {
     setSelected(newSelected);
   };
 
+  const connectWallet = async () => {
+    if (!window || !window.ethereum) {
+      alert('Please install MetaMask');
+      return;
+    }
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const web3 = new Web3(window.ethereum);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleMint = async () => {
+    if (!window || !window.ethereum) {
+      alert('Please install MetaMask');
+      return;
+    }
+    alert('Minting...');
+  };
+
   useEffect(() => {
     getWords();
   }, []);
@@ -108,9 +132,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <Title>Text To Image</Title>
+        <NavBar connectWallet={connectWallet} />
+        <Title>Select Your Text</Title>
         <TextField>{formatSentence(selected)}</TextField>
-
         <TogglesContainer>
           <ToggleButtonGroup value={selected} onChange={updateSelected}>
             {words.map((text, index) => {
@@ -124,8 +148,17 @@ export default function Home() {
         </TogglesContainer>
 
         <ButtonContainer>
-          <Button variant="contained" onClick={getImage}>
+          <Button
+            variant="contained"
+            onClick={getImage}
+            disabled={!selected.length}>
             Generate
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleMint}
+            disabled={!image.length}>
+            Mint
           </Button>
         </ButtonContainer>
 
