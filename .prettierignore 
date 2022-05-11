@@ -5,3 +5,9 @@ node_modules
 **/__tmp__/**
 lerna.json
 .github
+
+node_modules
+artifacts
+cache
+coverage*
+gasReporterOutput.json
