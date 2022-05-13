@@ -1,9 +1,13 @@
 import Head from 'next/head';
 import { useState, useRef, useEffect } from 'react';
+import { ethers } from 'ethers';
 import styled from '@emotion/styled';
 import Web3 from 'web3';
 import { ToggleButtonGroup, ToggleButton, Button } from '@mui/material';
 import { NavBar } from '../../components';
+import MyNFT from '../../artifacts/contracts/nft.sol/MyToken.json';
+
+const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
 const Title = styled.h4`
   font-size: 4rem;
@@ -64,13 +68,11 @@ export default function Create() {
   const [selected, setSelected] = useState([]);
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+
+  const textBaseURI = `https://gateway.pinata.cloud/ipfs/`;
 
   const imageRef = useRef();
-
-  const getWords = async () => {
-    const data = ['Cat', 'Dog', 'Baby', 'Cat'];
-    setWords(data);
-  };
 
   const getImage = () => {
     // TODO: need to check if the selected words are valid again
@@ -100,12 +102,53 @@ export default function Create() {
       return;
     }
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      setWalletAddress(accounts[0]);
       const web3 = new Web3(window.ethereum);
+      getNftData();
     } catch (error) {
       alert(error.message);
     }
   };
+
+  const getNftData = async () => {
+    if (!walletAddress) return;
+    setLoading(true);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // get the end user
+    const signer = provider.getSigner();
+
+    // get the smart contract
+    const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+    console.log(contract);
+    // const nft = await contract.methods.tokensOfOwner(walletAddress).call();
+    const balance = await contract.balanceOf(walletAddress);
+    console.log('wallet address: ', walletAddress);
+    console.log(balance.toString());
+
+    const nfts = await contract.listUserNFTs(contractAddress, walletAddress);
+    console.log(nfts);
+
+    const test = [];
+    for (let i = 0; i < nfts.length; i++) {
+      const tokenURI = await contract.tokenURI(nfts[i]);
+      const response = await fetch(
+        `${textBaseURI}${tokenURI.split('ipfs://')[1].split('/')[0]}`,
+      );
+      const result = await response.text();
+      test.push(result);
+    }
+    setLoading(false);
+    setWords(test);
+  };
+
+  useEffect(() => {
+    getNftData();
+  }, [walletAddress]);
 
   const handleMint = async () => {
     if (!window || !window.ethereum) {
@@ -114,10 +157,6 @@ export default function Create() {
     }
     alert('Minting...');
   };
-
-  useEffect(() => {
-    getWords();
-  }, []);
 
   useEffect(() => {
     imageRef.current.src = image;
@@ -137,10 +176,10 @@ export default function Create() {
         <TextField>{formatSentence(selected)}</TextField>
         <TogglesContainer>
           <ToggleButtonGroup value={selected} onChange={updateSelected}>
-            {words.map((text, index) => {
+            {words.map((word, index) => {
               return (
-                <ToggleButton key={index} value={`${text}-${index}`}>
-                  {text}
+                <ToggleButton key={index} value={`${word}-${index}`}>
+                  {word}
                 </ToggleButton>
               );
             })}

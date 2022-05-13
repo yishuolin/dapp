@@ -1,19 +1,24 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+const { expect } = require('chai');
+const { ethers } = require('hardhat');
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
+describe('MyNFT', function () {
+  it('Should mint and transfer an NFT to someone', async function () {
+    const Greeter = await ethers.getContractFactory('MyToken');
+    const greeter = await Greeter.deploy();
     await greeter.deployed();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    const recipient = '0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199';
+    const metadataURI = 'cid/test.png';
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    let balance = await greeter.balanceOf(recipient);
+    expect(balance).to.equal(0);
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
+    const newlyMintedToken = await greeter.payToMint(recipient, metadataURI, {
+      value: ethers.utils.parseEther('0.05'),
+    });
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    await newlyMintedToken.wait();
+    balance = await greeter.balanceOf(recipient);
+    expect(balance).to.equal(1);
   });
 });
