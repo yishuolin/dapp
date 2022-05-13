@@ -79,57 +79,19 @@ contract MyToken is ERC721, ERC721URIStorage, Ownable, ERC721Enumerable {
 
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, metadataURI);
-
-        balances[recipient]++;
-        // console.log(balances.toString());
-        console.log("recipient: ", recipient);
-        console.log("balances of the recipient:", balances[recipient]);
+        
         return newItemId;
     }
 
     function listUserNFTs(address contractAddress, address owner) external view returns (uint256[] memory) {
 
         uint256 balance = IERC721Enumerable(contractAddress).balanceOf(owner);
-        console.log(balance);
         uint256[] memory tokens = new uint256[](balance);
 
         for (uint256 i=0; i<balance; i++) {
-            console.log(i);
-            // console.log(IERC721Enumerable(contractAddress).tokenOfOwnerByIndex(owner, i));
-            // console.log(tokenOfOwnerByIndex(owner, i));
-            // tokens[i] = IERC721Enumerable(contractAddress).tokenOfOwnerByIndex(owner, i);
             tokens[i] = tokenOfOwnerByIndex(owner, i);
         }
         
         return tokens;
-    }
-
-    function getTokenIds(address contractAddress, address _owner) public view returns (uint[] memory) {
-        uint[] memory _tokensOfOwner = new uint[](ERC721.balanceOf(_owner));
-        uint i;
-
-        for (i=0;i<ERC721.balanceOf(_owner);i++){
-            _tokensOfOwner[i] = IERC721Enumerable(contractAddress).tokenOfOwnerByIndex(_owner, i);
-        }
-        return (_tokensOfOwner);
-    }
-
-    function ownerOfTokenIds(address contractAddress, address tokenOwner) external view returns (uint256[] memory) {
-        uint256[] memory result = new uint256[](balanceOf(tokenOwner));
-        uint256 counter = 0;
-        for (uint256 i = 0; i < balanceOf(tokenOwner); i++) {
-            if (ownerOf(i) == tokenOwner) {
-                // result[counter] = i;
-                // counter++;
-                // console.log("test", IERC721Enumerable(contractAddress).tokenOfOwnerByIndex(tokenOwner, i));
-                result[i] = IERC721Enumerable(contractAddress).tokenOfOwnerByIndex(tokenOwner, i);
-                // result[i] = tokenOfOwnerByIndex(tokenOwner, i);
-            }
-        }
-        return result;
-    }
-
-    function getBalancesOfUser(address user) external view returns (uint256) {
-        return balances[user];
     }
 }

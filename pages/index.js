@@ -1,22 +1,30 @@
 import Head from 'next/head';
-import { useState, useRef, useEffect } from 'react';
-import { Button } from '@mui/material';
-import Link from 'next/link';
-import { ethers } from 'ethers';
 import styled from '@emotion/styled';
 import Web3 from 'web3';
 import { NavBar, NFTText } from '../components';
-import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
+
+const Main = styled.div`
+  background: #000;
+  height: 100vh;
+`;
 
 const Title = styled.h3`
-  font-size: 4rem;
-  margin-y: 15rem;
+  font-size: 3rem;
   text-align: center;
+  color: #fff;
+  span {
+    text-shadow: 0 0 40px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
+    background: linear-gradient(to right, #30CFD0, #c43ad6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  width: 70%;
+  margin: 0 auto;
 `;
 
 export default function Home() {
@@ -34,40 +42,35 @@ export default function Home() {
     }
   };
   return (
-    <div>
+    <>
       <Head>
         <title>Dapp Final Project</title>
         <meta name="description" content="Dapp Final Project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Main>
         <NavBar connectWallet={connectWallet} />
-        <Title>Welcome!</Title>
-        <Link href="/create">
-          <Button variant="contained">Create</Button>
-        </Link>
+        <Title>Own your <span>TEXT</span>.</Title>
 
         <Container>
-          <div>
-            <NFTText
-              tokenId={0}
-              getCount={() => {}}
-              contentId={'QmYFwsqNqqCV7PEMrGwJKfy4wVmM1mZ5Uaamr2CQM2G8rb'}
-            />
-            <NFTText
-              tokenId={1}
-              getCount={() => {}}
-              contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
-            />
-          </div>
+          <NFTText
+            tokenId={0}
+            getCount={() => {}}
+            contentId={'QmYFwsqNqqCV7PEMrGwJKfy4wVmM1mZ5Uaamr2CQM2G8rb'}
+          />
+          <NFTText
+            tokenId={1}
+            getCount={() => {}}
+            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
+          />
+          <NFTText
+            tokenId={2}
+            getCount={() => {}}
+            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
+          />
         </Container>
-      </main>
-
-      {/* 
-      <Footer>
-        <div>Decentralized Applications Design and Practice 2022 @NTU</div>
-      </Footer> */}
-    </div>
+      </Main>
+    </>
   );
 }
