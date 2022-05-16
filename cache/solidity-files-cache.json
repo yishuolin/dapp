@@ -74,8 +74,8 @@
       ]
     },
     "/Users/linyishuo/dev/dapp/contracts/nft.sol": {
-      "lastModificationDate": 1652412967335,
-      "contentHash": "671a94d9450a4e539a49a87b5c00ab27",
+      "lastModificationDate": 1652465167171,
+      "contentHash": "be195a84cc3671b2ce567872e41bf6e5",
       "sourceName": "contracts/nft.sol",
       "solcConfig": {
         "version": "0.8.4",

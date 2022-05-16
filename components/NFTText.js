@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
-import {
-  // Button,
-  // Card,
-  // CardActions,
-  // CardContent,
-  // CardMedia,
-  Typography,
-} from '@mui/material';
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const folder = 'QmXMZP947EdcmxDLDnzEmCT6j9GfV7NphCmmmZQMuBwE6x';
 
 const Card = styled.div`
   display: flex;
@@ -24,14 +15,19 @@ const Card = styled.div`
   position: relative;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.15);
-  > div, img {
+  > div,
+  img {
     z-index: 2;
   }
-  ${props => props.blur && `
+  ${(props) =>
+    props.blur &&
+    `
   overflow: hidden;
   `}
   &:before {
-    ${props => props.blur && `
+    ${(props) =>
+      props.blur &&
+      `
     content: '';
     background: url(${props.blur}) no-repeat;
     background-size: cover;
@@ -40,9 +36,8 @@ const Card = styled.div`
     position: absolute;
     filter: blur(96px);
     -webkit-filter: blur(96px);
-    ` }
+    `}
   }
-  
 `;
 
 const Button = styled.button`
@@ -56,64 +51,68 @@ const Button = styled.button`
   border-radius: 12px;
   transition: all 0.3s ease;
   &:hover {
-    ${props => props.glowOnHover && `
+    ${(props) =>
+      props.glowOnHover &&
+      `
     box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 20px 0px;
-    transition: all 0.3s ease;`
-    }
-    ${props => props.outlined && `
+    transition: all 0.3s ease;`}
+    ${(props) =>
+      props.outlined &&
+      `
     background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
     transition: all 0.3s ease;
-    `
-  }
+    `}
   }
   transition: all 0.3s ease;
-  ${props => props.outlined ? `
+  ${(props) =>
+    props.outlined
+      ? `
   border: 2px double transparent;
   background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  ` : `
+  `
+      : `
   background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
   border: 0;
   `}
-  `;
+`;
 
-
-  const Description = styled.div`
+const Description = styled.div`
   display: flex;
   justify-content: space-between;
   width: 90%;
   margin: 0 auto;
   margin-top: 20px;
+`;
 
-  `
-
-  const Price = styled.div`
+const Price = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   img {
     width: 20px;
     margin-right: 5px;
+    margin-left: -5px;
   }
-  `
+`;
 
 const Title = styled.h5`
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 500;
   margin: 0;
   margin-bottom: 0.5rem;
   color: #808080;
-  `;
+`;
 const Content = styled.h4`
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0;
   margin-bottom: 0.5rem;
   color: #fff;
-  `;
+`;
 
-  const ButtonsContainer = styled.div`
+const ButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 90%;
@@ -124,8 +123,7 @@ const Content = styled.h4`
     margin-right: 15px;
     margin-left: -5px;
   }
-  `
-
+`;
 
 function NFTText({ tokenId, getCount, contentId }) {
   // const metadataURI = `${contentId}/${tokenId}.json`;
@@ -215,24 +213,33 @@ function NFTText({ tokenId, getCount, contentId }) {
     //   </CardActions>
     // </Card>
     <Card blur={gifURI}>
-      <img src={gifURI} alt="gif" style={{borderRadius: '8px'}} />
+      <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
       <Description>
         <div>
-        <Title>{`#${tokenId}`}</Title>
-        <Content>{metadata.name}</Content>
+          <Title>{`#${tokenId}`}</Title>
+          <Content>{metadata.name}</Content>
         </div>
         <div>
-        <Title>Price</Title>
-        <Content><Price><img src="/img/eth.png" />0.05</Price></Content>
+          <Title>Price</Title>
+          <Content>
+            <Price>
+              <img src="/img/eth.png" />
+              0.05
+            </Price>
+          </Content>
         </div>
       </Description>
       <ButtonsContainer>
-        <Button onClick={mintToken} glowOnHover>
-        Mint
-      </Button>
-      <Button onClick={getURI} glowOnHover>
-        View
-      </Button>
+        {isMinted ? (
+          <Button>Sold</Button>
+        ) : (
+          <Button onClick={mintToken} glowOnHover>
+            Mint
+          </Button>
+        )}
+        <Button onClick={getURI} glowOnHover>
+          View
+        </Button>
       </ButtonsContainer>
     </Card>
   );

@@ -14,7 +14,7 @@ const Title = styled.h3`
   color: #fff;
   span {
     text-shadow: 0 0 40px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
-    background: linear-gradient(to right, #30CFD0, #c43ad6);
+    background: linear-gradient(to right, #30cfd0, #c43ad6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -51,7 +51,9 @@ export default function Home() {
 
       <Main>
         <NavBar connectWallet={connectWallet} />
-        <Title>Own your <span>TEXT</span>.</Title>
+        <Title>
+          Own your <span>TEXT</span>.
+        </Title>
 
         <Container>
           <NFTText
