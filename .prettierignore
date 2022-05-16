@@ -1,0 +1,13 @@
+node_modules
+**/.next/**
+**/_next/**
+**/dist/**
+**/__tmp__/**
+lerna.json
+.github
+
+node_modules
+artifacts
+cache
+coverage*
+gasReporterOutput.json
