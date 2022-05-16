@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import Web3 from 'web3';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { NavBar } from '../../components';
+import { NavBar, Button } from '../../components';
 import MyNFT from '../../artifacts/contracts/nft.sol/MyToken.json';
 
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
@@ -14,43 +14,6 @@ const Main = styled.div`
   background: #000;
   height: 100vh;
   color: #fff;
-`;
-
-const Button = styled.button`
-  font-family: sans-serif;
-  color: #fff;
-  font-size: 18px;
-  padding: 12px 32px;
-  margin: 1rem;
-  cursor: pointer;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  &:hover {
-    ${(props) =>
-      props.glowOnHover &&
-      `
-    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 20px 0px;
-    transition: all 0.3s ease;`}
-    ${(props) =>
-      props.outlined &&
-      `
-    background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
-    transition: all 0.3s ease;
-    `}
-  }
-  transition: all 0.3s ease;
-  ${(props) =>
-    props.outlined
-      ? `
-  border: 2px double transparent;
-  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  `
-      : `
-  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
-  border: 0;
-  `}
 `;
 
 const Title = styled.h4`
@@ -218,10 +181,18 @@ export default function Create() {
         </TogglesContainer>
 
         <ButtonContainer>
-          <Button glowOnHover onClick={getImage} disabled={!selected.length}>
+          <Button
+            glowOnHover
+            onClick={getImage}
+            disabled={!selected.length}
+            variant="filled">
             Generate
           </Button>
-          <Button glowOnHover onClick={handleMint} disabled={!image.length}>
+          <Button
+            glowOnHover
+            onClick={handleMint}
+            disabled={!image.length}
+            variant="filled">
             Mint
           </Button>
         </ButtonContainer>

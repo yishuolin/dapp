@@ -1,5 +1,5 @@
 import NavBar from './NavBar';
-import WalletBalance from './WalletBalance';
 import NftCard from './NftCard';
+import Button from './Button';
 
-export { NavBar, WalletBalance, NftCard };
+export { NavBar, NftCard, Button };
