@@ -100,7 +100,6 @@ export default function Create() {
   const [selected, setSelected] = useState([]);
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [walletAddress, setWalletAddress] = useState('');
 
   // const textBaseURI = `https://gateway.pinata.cloud/ipfs/`;
 
@@ -141,7 +140,6 @@ export default function Create() {
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
-      setWalletAddress(accounts[0]);
       const web3 = new Web3(window.ethereum);
       // getNftData();
     } catch (error) {
@@ -161,35 +159,20 @@ export default function Create() {
     setLoading(true);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    // get the end user
     const signer = provider.getSigner();
-    // get the smart contract
     const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
-    // const nft = await contract.methods.tokensOfOwner(walletAddress).call();
-    const balance = await contract.balanceOf(walletAddr);
 
     const nfts = await contract.listUserNFTs(contractAddress, walletAddr);
-    console.log(nfts);
     const test = [];
     for (let i = 0; i < nfts.length; i++) {
-      // const tokenURI = await contract.tokenURI(nfts[i]);
-      // const response = await fetch(
-      //   `${textBaseURI}${tokenURI.split('ipfs://')[1].split('/')[0]}`,
-      // );
-      // const result = await response.text();
-      // TODO: nfts[i] index is wrong
-      const response = await fetch(`/metadata/${nfts[i]}.json`);
+      const tokenURI = await contract.tokenURI(nfts[i]);
+      const response = await fetch(tokenURI);
       const metadata = await response.json();
       test.push(metadata.name);
     }
     setLoading(false);
     setWords(test);
   };
-
-  // useEffect(() => {
-  //   getNftData();
-  // }, [walletAddress]);
 
   useEffect(() => {
     getNftData();

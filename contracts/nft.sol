@@ -21,7 +21,8 @@ contract MyToken is ERC721, ERC721URIStorage, Ownable, ERC721Enumerable {
     constructor() ERC721("MyToken", "ABC") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://";
+        // return "ipfs://";
+        return "";
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)

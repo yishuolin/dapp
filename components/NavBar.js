@@ -13,6 +13,8 @@ const Logo = styled.div`
   margin-left: 2rem;
   font-size: 40px;
   cursor: pointer;
+  font-weight: bold;
+  text-shadow: 0 0 50px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
 `;
 
 const Button = styled.button`
@@ -51,12 +53,12 @@ const Button = styled.button`
   border: 0;
   `}
 `;
-
+// TODO: show connect wallet button only if not connected
 function NavBar({ connectWallet }) {
   return (
     <Container>
       <Link href="/">
-        <Logo>LOGO</Logo>
+        <Logo>The Text</Logo>
       </Link>
       <div>
         <Link href="/create">

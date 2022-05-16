@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styled from '@emotion/styled';
 import Web3 from 'web3';
-import { NavBar, NFTText } from '../components';
+import { NavBar, NftCard } from '../components';
 
 const Main = styled.div`
   background: #000;
@@ -56,17 +56,17 @@ export default function Home() {
         </Title>
 
         <Container>
-          <NFTText
+          <NftCard
             tokenId={0}
             getCount={() => {}}
             contentId={'QmYFwsqNqqCV7PEMrGwJKfy4wVmM1mZ5Uaamr2CQM2G8rb'}
           />
-          <NFTText
+          <NftCard
             tokenId={1}
             getCount={() => {}}
             contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
           />
-          <NFTText
+          <NftCard
             tokenId={2}
             getCount={() => {}}
             contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
