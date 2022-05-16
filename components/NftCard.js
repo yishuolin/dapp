@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
+import Tilt from 'react-parallax-tilt';
 import { Button } from '.';
 import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
 // TODO: move to constants
@@ -143,46 +144,48 @@ function NFTText({ tokenId, getCount, contentId }) {
     alert(uri);
   }
   return (
-    <Card blur={gifURI}>
-      <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
-      <Description>
-        <div>
-          <Title>{`#${tokenId}`}</Title>
-          <Content>{metadata.name}</Content>
-        </div>
-        <div>
-          <Title>Price</Title>
-          <Content>
-            <Price>
-              <img src="/img/eth.png" />
-              0.05
-            </Price>
-          </Content>
-        </div>
-      </Description>
-      <ButtonsContainer>
-        {isMinted ? (
-          <Button disabled padding="7px 22px" variant="semiTransparent">
-            Sold
-          </Button>
-        ) : (
+    <Tilt tiltEnable={false} scale={1.05}>
+      <Card blur={gifURI}>
+        <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
+        <Description>
+          <div>
+            <Title>{`#${tokenId}`}</Title>
+            <Content>{metadata.name}</Content>
+          </div>
+          <div>
+            <Title>Price</Title>
+            <Content>
+              <Price>
+                <img src="/img/eth.png" />
+                0.05
+              </Price>
+            </Content>
+          </div>
+        </Description>
+        <ButtonsContainer>
+          {isMinted ? (
+            <Button disabled padding="7px 22px" variant="semiTransparent">
+              Sold
+            </Button>
+          ) : (
+            <Button
+              onClick={mintToken}
+              glowOnHover
+              padding="7px 22px"
+              variant="semiTransparent">
+              Mint
+            </Button>
+          )}
           <Button
-            onClick={mintToken}
+            onClick={getURI}
             glowOnHover
             padding="7px 22px"
             variant="semiTransparent">
-            Mint
+            View
           </Button>
-        )}
-        <Button
-          onClick={getURI}
-          glowOnHover
-          padding="7px 22px"
-          variant="semiTransparent">
-          View
-        </Button>
-      </ButtonsContainer>
-    </Card>
+        </ButtonsContainer>
+      </Card>
+    </Tilt>
   );
 }
 

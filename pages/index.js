@@ -54,7 +54,6 @@ export default function Home() {
         <Title>
           Own your <span>TEXT</span>.
         </Title>
-
         <Container>
           <NftCard
             tokenId={0}
