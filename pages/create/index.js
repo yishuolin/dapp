@@ -6,9 +6,8 @@ import Web3 from 'web3';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { NavBar, Button } from '../../components';
+import { CONTRACT_ADDRESS } from '../../utils';
 import MyNFT from '../../artifacts/contracts/nft.sol/MyToken.json';
-
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
 const Main = styled.div`
   background: #000;
@@ -123,9 +122,9 @@ export default function Create() {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, MyNFT.abi, signer);
 
-    const nfts = await contract.listUserNFTs(contractAddress, walletAddr);
+    const nfts = await contract.listUserNFTs(CONTRACT_ADDRESS, walletAddr);
     const test = [];
     for (let i = 0; i < nfts.length; i++) {
       const tokenURI = await contract.tokenURI(nfts[i]);

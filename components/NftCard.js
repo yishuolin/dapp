@@ -4,8 +4,7 @@ import styled from '@emotion/styled';
 import Tilt from 'react-parallax-tilt';
 import { Button } from '.';
 import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
-// TODO: move to constants
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+import { CONTRACT_ADDRESS } from '../utils';
 
 const Card = styled.div`
   display: flex;
@@ -90,7 +89,7 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-function NFTText({ tokenId, getCount, contentId }) {
+function NFTCard({ tokenId, getCount }) {
   const gifURI = `/gif/${tokenId}.gif`;
   const metadataURI = `/metadata/${tokenId}.json`;
 
@@ -119,7 +118,7 @@ function NFTText({ tokenId, getCount, contentId }) {
   const getMintedStatus = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, MyNFT.abi, signer);
     setContract(contract);
     const result = await contract.isContentOwned(metadataURI);
     setIsMinted(result);
@@ -189,4 +188,4 @@ function NFTText({ tokenId, getCount, contentId }) {
   );
 }
 
-export default NFTText;
+export default NFTCard;
