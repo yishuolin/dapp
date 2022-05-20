@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState, useRef, useEffect } from 'react';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
+import Web3 from 'web3';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { NavBar, Button } from '../../components';
@@ -56,7 +57,7 @@ const Loading = styled.div`
   color: #fff;
 `;
 
-export default function Create() {
+export default function Profile() {
   const [words, setWords] = useState([]);
   const [selected, setSelected] = useState([]);
   const [image, setImage] = useState('');
@@ -98,6 +99,7 @@ export default function Create() {
     });
     const walletAddr = accounts[0];
     if (!walletAddr) {
+      connectWallet();
       return;
     }
     setLoading(true);

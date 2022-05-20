@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import styled from '@emotion/styled';
-import { jsx, css, keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 import ReactRotatingText from 'react-rotating-text';
-import Web3 from 'web3';
 import { NavBar, NftCard } from '../components';
 
 const Main = styled.div`
@@ -48,19 +47,7 @@ const Container = styled.div`
 
 export default function Home() {
   const tokens = [0, 1, 2];
-  // TODO: duplicate
-  const connectWallet = async () => {
-    if (!window || !window.ethereum) {
-      alert('Please install MetaMask');
-      return;
-    }
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const web3 = new Web3(window.ethereum);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+
   return (
     <>
       <Head>
@@ -70,7 +57,7 @@ export default function Home() {
       </Head>
 
       <Main>
-        <NavBar connectWallet={connectWallet} />
+        <NavBar />
         <Title>
           <ReactRotatingText
             items={['Own', 'Enjoy', 'Love']}
@@ -81,7 +68,7 @@ export default function Home() {
         </Title>
         <Container>
           {tokens.map((tokenId) => (
-            <NftCard key={tokenId} tokenId={tokenId} getCount={() => {}} />
+            <NftCard key={tokenId} tokenId={tokenId} />
           ))}
         </Container>
       </Main>

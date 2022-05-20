@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Button } from '.';
+import { useWalletStatus } from '../hooks';
 
 const Container = styled.div`
   display: flex;
@@ -21,8 +22,9 @@ const Logo = styled.div`
   text-shadow: 0 0 50px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
 `;
 
-// TODO: show connect wallet button only if not connected
-function NavBar({ connectWallet }) {
+const NavBar = () => {
+  const [connectWallet, isConnected] = useWalletStatus();
+
   return (
     <Container>
       <Link href="/">
@@ -32,11 +34,18 @@ function NavBar({ connectWallet }) {
         <Link href="/create">
           <Button variant="outlined">Create Your Art</Button>
         </Link>
-        <Button variant="outlined" onClick={connectWallet}>
-          Connect Wallet
-        </Button>
+        {isConnected ? (
+          <Link href="/profile">
+            <Button variant="outlined">My Art</Button>
+          </Link>
+        ) : (
+          <Button variant="outlined" onClick={connectWallet}>
+            Connect Wallet
+          </Button>
+        )}
       </div>
     </Container>
   );
-}
+};
+
 export default NavBar;

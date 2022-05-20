@@ -89,7 +89,7 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-function NFTCard({ tokenId, getCount }) {
+function NFTCard({ tokenId }) {
   const gifURI = `/gif/${tokenId}.gif`;
   const metadataURI = `/metadata/${tokenId}.json`;
 
@@ -135,7 +135,6 @@ function NFTCard({ tokenId, getCount }) {
 
     await result.wait();
     getMintedStatus();
-    getCount();
   };
 
   async function getURI() {
