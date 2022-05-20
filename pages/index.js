@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import styled from '@emotion/styled';
+import { jsx, css, keyframes } from '@emotion/react';
+import ReactRotatingText from 'react-rotating-text';
 import Web3 from 'web3';
 import { NavBar, NftCard } from '../components';
 
@@ -8,16 +10,33 @@ const Main = styled.div`
   height: 100vh;
 `;
 
+const BlinkingCursor = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
 const Title = styled.h3`
   font-size: 3rem;
   text-align: center;
   color: #fff;
-  span {
-    text-shadow: 0 0 40px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
-    background: linear-gradient(to right, #30cfd0, #c43ad6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .react-rotating-text-cursor {
+    animation: ${BlinkingCursor} 1s cubic-bezier(0.68, 0.01, 0.01, 0.99) 0s
+      infinite;
   }
+`;
+
+const GlowWithGradient = styled.span`
+  text-shadow: 0 0 40px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
+  background: linear-gradient(to right, #30cfd0, #c43ad6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const Container = styled.div`
@@ -28,6 +47,7 @@ const Container = styled.div`
 `;
 
 export default function Home() {
+  const tokens = [0, 1, 2];
   // TODO: duplicate
   const connectWallet = async () => {
     if (!window || !window.ethereum) {
@@ -52,24 +72,17 @@ export default function Home() {
       <Main>
         <NavBar connectWallet={connectWallet} />
         <Title>
-          Own your <span>TEXT</span>.
+          <ReactRotatingText
+            items={['Own', 'Enjoy', 'Love']}
+            typingInterval="120"
+            deletingInterval="100"
+          />{' '}
+          your <GlowWithGradient>TEXT</GlowWithGradient>.
         </Title>
         <Container>
-          <NftCard
-            tokenId={0}
-            getCount={() => {}}
-            contentId={'QmYFwsqNqqCV7PEMrGwJKfy4wVmM1mZ5Uaamr2CQM2G8rb'}
-          />
-          <NftCard
-            tokenId={1}
-            getCount={() => {}}
-            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
-          />
-          <NftCard
-            tokenId={2}
-            getCount={() => {}}
-            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
-          />
+          {tokens.map((tokenId) => (
+            <NftCard key={tokenId} tokenId={tokenId} getCount={() => {}} />
+          ))}
         </Container>
       </Main>
     </>

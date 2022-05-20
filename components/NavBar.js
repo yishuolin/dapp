@@ -26,7 +26,7 @@ function NavBar({ connectWallet }) {
   return (
     <Container>
       <Link href="/">
-        <Logo>The Text</Logo>
+        <Logo>The TEXT</Logo>
       </Link>
       <div>
         <Link href="/create">

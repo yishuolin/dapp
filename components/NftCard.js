@@ -143,7 +143,7 @@ function NFTCard({ tokenId, getCount }) {
     alert(uri);
   }
   return (
-    <Tilt tiltEnable={false} scale={1.05}>
+    <Tilt tiltEnable={false} scale={1.03}>
       <Card blur={gifURI}>
         <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
         <Description>
