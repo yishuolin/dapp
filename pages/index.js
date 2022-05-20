@@ -2,10 +2,9 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import ReactRotatingText from 'react-rotating-text';
-import { NavBar, NftCard } from '../components';
+import { NavBar, NftCard, Intro } from '../components';
 
 const Main = styled.div`
-  background: #000;
   height: 100vh;
 `;
 
@@ -43,10 +42,11 @@ const Container = styled.div`
   justify-content: space-around;
   width: 70%;
   margin: 0 auto;
+  flex-wrap: wrap;
 `;
 
 export default function Home() {
-  const tokens = [0, 1, 2];
+  const tokens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   return (
     <>
@@ -58,9 +58,10 @@ export default function Home() {
 
       <Main>
         <NavBar />
+        <Intro />
         <Title>
           <ReactRotatingText
-            items={['Own', 'Enjoy', 'Love']}
+            items={['Mint', 'Own', 'Enjoy', 'Love']}
             typingInterval="120"
             deletingInterval="100"
           />{' '}
@@ -68,7 +69,7 @@ export default function Home() {
         </Title>
         <Container>
           {tokens.map((tokenId) => (
-            <NftCard key={tokenId} tokenId={tokenId} />
+            <NftCard key={tokenId} tokenId={tokenId % 3} />
           ))}
         </Container>
       </Main>

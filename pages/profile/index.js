@@ -10,7 +10,6 @@ import { CONTRACT_ADDRESS } from '../../utils';
 import MyNFT from '../../artifacts/contracts/nft.sol/MyToken.json';
 
 const Main = styled.div`
-  background: #000;
   height: 100vh;
   color: #fff;
 `;
