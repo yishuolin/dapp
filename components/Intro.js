@@ -38,6 +38,7 @@ const Gallery = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   mask: linear-gradient(90deg, rgba(255, 255, 255, 0.2), #fff);
+  margin-left: -10%;
 `;
 
 const Card = styled.div`
@@ -46,6 +47,8 @@ const Card = styled.div`
   background: linear-gradient(to right, #30cfd0, #c43ad6);
   border-radius: 0.5rem;
   margin-bottom: 0.8rem;
+  // background: url(/img/galaxy.jpeg);
+  background-size: cover;
 `;
 
 const Intro = () => {
@@ -53,6 +56,7 @@ const Intro = () => {
   useEffect(() => {
     setTiltEnablem(false);
   }, []);
+
   return (
     <Container>
       <Description>
@@ -60,8 +64,9 @@ const Intro = () => {
           NFTs <br></br>for Decentralized <br></br>Generative Art
         </Title>
         <Subtitle>
-          <GlowWithGradient>The Text</GlowWithGradient> is a collection of 999
-          NFTs representing 999 text. Mint one to creat beautiful artwork by AI.
+          <GlowWithGradient>The Text</GlowWithGradient> is a collection of 1000
+          NFTs representing 1000 text. Mint one to creat beautiful artwork by
+          AI.
         </Subtitle>
       </Description>
       <Tilt tiltAngleYInitial={20} tiltEnable={tiltEnable}>
