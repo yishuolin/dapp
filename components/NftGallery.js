@@ -17,7 +17,7 @@ const BlinkingCursor = keyframes`
 `;
 
 const Title = styled.h3`
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-align: center;
   color: #fff;
   .react-rotating-text-cursor {

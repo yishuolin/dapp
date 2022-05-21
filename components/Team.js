@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Slide from 'react-reveal/Slide';
 
 const Container = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: bold;
   text-align: center;
   width: 100%;
@@ -20,7 +21,7 @@ const MembersContainer = styled.div`
   justify-content: space-around;
   width: 70%;
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 3rem;
 `;
 
 const Member = styled.div`
@@ -44,32 +45,34 @@ const Team = () => {
   return (
     <Container>
       <Title>Team</Title>
-      <MembersContainer>
-        <Member>
-          <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61d83eb452352e9adee34f0b_la.png" />
-          <Name>XXX</Name>
-          <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            egestas dolor augue.
-          </Description>
-        </Member>
-        <Member>
-          <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61dc003e622493023e1023a9_margo.png" />
-          <Name>YYY</Name>
-          <Description>
-            Curabitur aliquet massa ac tristique maximus. Quisque suscipit
-            varius mauris a fringilla
-          </Description>
-        </Member>
-        <Member>
-          <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61efa9a55ae46a429703ff89_zander.png" />
-          <Name>XXX</Name>
-          <Description>
-            Nam eget faucibus massa. Praesent commodo dignissim arcu, convallis
-            posuere eros pharetra et.
-          </Description>
-        </Member>
-      </MembersContainer>
+      <Slide left cascade>
+        <MembersContainer>
+          <Member>
+            <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61d83eb452352e9adee34f0b_la.png" />
+            <Name>XXX</Name>
+            <Description>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+              egestas dolor augue.
+            </Description>
+          </Member>
+          <Member>
+            <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61dc003e622493023e1023a9_margo.png" />
+            <Name>YYY</Name>
+            <Description>
+              Curabitur aliquet massa ac tristique maximus. Quisque suscipit
+              varius mauris a fringilla
+            </Description>
+          </Member>
+          <Member>
+            <img src="https://uploads-ssl.webflow.com/61a08842191af40097b65a21/61efa9a55ae46a429703ff89_zander.png" />
+            <Name>XXX</Name>
+            <Description>
+              Nam eget faucibus massa. Praesent commodo dignissim arcu,
+              convallis posuere eros pharetra et.
+            </Description>
+          </Member>
+        </MembersContainer>
+      </Slide>
     </Container>
   );
 };

@@ -38,7 +38,7 @@ const Gallery = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   mask: linear-gradient(90deg, rgba(255, 255, 255, 0.2), #fff);
-  margin-left: -10%;
+  margin-left: -5%;
 `;
 
 const Card = styled.div`
