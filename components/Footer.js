@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 const Container = styled.footer`
-  height: 200px;
+  height: 120px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
 `;
 

@@ -12,8 +12,7 @@ const Card = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  margin: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   position: relative;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.15);

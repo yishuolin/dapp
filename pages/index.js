@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styled from '@emotion/styled';
-import { NavBar, Intro, NftGallery, Footer } from '../components';
+import { NavBar, Intro, NftGallery, Team, Footer } from '../components';
 
 const Main = styled.div`
   height: 100vh;
@@ -23,6 +23,7 @@ export default function Home() {
         <NavBar />
         <Intro />
         <NftGallery tokens={tokens} />
+        <Team />
         <Footer />
       </Main>
     </>

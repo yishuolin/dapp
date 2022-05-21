@@ -6,9 +6,11 @@ import { useWalletStatus } from '../hooks';
 
 const Container = styled.div`
   display: flex;
+  width: 97%;
+  margin: 0 auto;
   justify-content: space-between;
-  button {
-    margin: 1rem;
+  div button {
+    margin: 1.5rem 1rem;
   }
 `;
 
@@ -35,9 +37,7 @@ const NavBar = () => {
           <Button variant="outlined">Create Your Art</Button>
         </Link>
         {isConnected ? (
-          <Link href="/profile">
-            <Button variant="outlined">My Art</Button>
-          </Link>
+          <Button variant="filled">Connected</Button>
         ) : (
           <Button variant="outlined" onClick={connectWallet}>
             Connect Wallet

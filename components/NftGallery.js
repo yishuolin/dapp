@@ -36,9 +36,12 @@ const GlowWithGradient = styled.span`
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 70%;
+  width: 65%;
   margin: 0 auto;
   flex-wrap: wrap;
+  > div {
+    margin-top: 30px;
+  }
 `;
 
 const NftGallery = ({ tokens }) => {
@@ -47,7 +50,7 @@ const NftGallery = ({ tokens }) => {
       <Title>
         <ReactRotatingText
           items={['Mint', 'Own', 'Enjoy', 'Love']}
-          typingInterval="120"
+          typingInterval={120}
           deletingInterval={100}
         />{' '}
         your <GlowWithGradient>TEXT</GlowWithGradient>.
