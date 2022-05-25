@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+import Tilt from 'react-parallax-tilt';
+import PropTypes from 'prop-types';
+import { Button } from '.';
+import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
+import { CONTRACT_ADDRESS } from '../utils';
 
 const Card = styled.div`
   display: flex;
@@ -10,8 +13,7 @@ const Card = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  margin: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   position: relative;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.15);
@@ -38,44 +40,6 @@ const Card = styled.div`
     -webkit-filter: blur(96px);
     `}
   }
-`;
-
-const Button = styled.button`
-  font-family: sans-serif;
-  color: #fff;
-  font-size: 18px;
-  // padding: 12px 32px; // TODO: make this dynamic
-  padding: 7px 22px;
-  // margin: 1rem;
-  cursor: pointer;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  &:hover {
-    ${(props) =>
-      props.glowOnHover &&
-      `
-    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 20px 0px;
-    transition: all 0.3s ease;`}
-    ${(props) =>
-      props.outlined &&
-      `
-    background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
-    transition: all 0.3s ease;
-    `}
-  }
-  transition: all 0.3s ease;
-  ${(props) =>
-    props.outlined
-      ? `
-  border: 2px double transparent;
-  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  `
-      : `
-  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
-  border: 0;
-  `}
 `;
 
 const Description = styled.div`
@@ -125,7 +89,7 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-function NFTText({ tokenId, getCount, contentId }) {
+function NFTCard({ tokenId }) {
   const gifURI = `/gif/${tokenId}.gif`;
   const metadataURI = `/metadata/${tokenId}.json`;
 
@@ -154,9 +118,9 @@ function NFTText({ tokenId, getCount, contentId }) {
   const getMintedStatus = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, MyNFT.abi, signer);
     setContract(contract);
-    const result = await contract.isContentOwned(metadataURI); 
+    const result = await contract.isContentOwned(metadataURI);
     setIsMinted(result);
   };
 
@@ -171,45 +135,60 @@ function NFTText({ tokenId, getCount, contentId }) {
 
     await result.wait();
     getMintedStatus();
-    getCount();
   };
 
-  async function getURI() {
+  const getURI = async () => {
     const uri = await contract.tokenURI(tokenId);
     alert(uri);
-  }
+  };
   return (
-    <Card blur={gifURI}>
-      <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
-      <Description>
-        <div>
-          <Title>{`#${tokenId}`}</Title>
-          <Content>{metadata.name}</Content>
-        </div>
-        <div>
-          <Title>Price</Title>
-          <Content>
-            <Price>
-              <img src="/img/eth.png" />
-              0.05
-            </Price>
-          </Content>
-        </div>
-      </Description>
-      <ButtonsContainer>
-        {isMinted ? (
-          <Button disabled>Sold</Button>
-        ) : (
-          <Button onClick={mintToken} glowOnHover>
-            Mint
+    <Tilt tiltEnable={false} scale={1.03}>
+      <Card blur={gifURI}>
+        <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
+        <Description>
+          <div>
+            <Title>{`#${tokenId}`}</Title>
+            <Content>{metadata.name}</Content>
+          </div>
+          <div>
+            <Title>Price</Title>
+            <Content>
+              <Price>
+                <img src="/img/eth.png" />
+                0.05
+              </Price>
+            </Content>
+          </div>
+        </Description>
+        <ButtonsContainer>
+          {isMinted ? (
+            <Button disabled padding="7px 22px" variant="semiTransparent">
+              Sold
+            </Button>
+          ) : (
+            <Button
+              onClick={mintToken}
+              glowOnHover
+              padding="7px 22px"
+              variant="semiTransparent">
+              Mint
+            </Button>
+          )}
+          <Button
+            onClick={getURI}
+            glowOnHover
+            padding="7px 22px"
+            variant="semiTransparent">
+            View
           </Button>
-        )}
-        <Button onClick={getURI} glowOnHover>
-          View
-        </Button>
-      </ButtonsContainer>
-    </Card>
+        </ButtonsContainer>
+      </Card>
+    </Tilt>
   );
 }
 
-export default NFTText;
+NFTCard.propTypes = {
+  tokenId: PropTypes.number.isRequired,
+};
+
+export default NFTCard;

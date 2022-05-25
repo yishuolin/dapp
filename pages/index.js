@@ -1,46 +1,57 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import styled from '@emotion/styled';
-import Web3 from 'web3';
-import { NavBar, NftCard } from '../components';
+import { NavBar, Yoda, Intro, NftGallery, Team, Footer } from '../components';
 
-const Main = styled.div`
-  background: #000;
+const ModelContainer = styled.div`
   height: 100vh;
-`;
-
-const Title = styled.h3`
-  font-size: 3rem;
-  text-align: center;
-  color: #fff;
-  span {
-    text-shadow: 0 0 40px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
-    background: linear-gradient(to right, #30cfd0, #c43ad6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  button {
+    font-weight: bold;
+    position: absolute;
+    top: 90%;
+    left: calc(50% - 110px);
+    color: #fff;
+    font-size: 18px;
+    padding: 12px 32px;
+    background-image: linear-gradient(
+      to right,
+      rgb(243 196 24),
+      rgb(209 58 219)
+    );
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 15px 0px;
+    }
   }
 `;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 70%;
-  margin: 0 auto;
-`;
+const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const [showSpline, setShowSpline] = useState(true);
+  const [showMain, setShowMain] = useState(false);
 
-export default function Home() {
-  // TODO: duplicate
-  const connectWallet = async () => {
-    if (!window || !window.ethereum) {
-      alert('Please install MetaMask');
-      return;
-    }
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const web3 = new Web3(window.ethereum);
-    } catch (error) {
-      alert(error.message);
-    }
+  const handleExplore = () => {
+    setShowMain(true);
+    setTimeout(() => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth',
+      });
+    });
+    setTimeout(() => {
+      setShowSpline(false);
+    }, 1000);
   };
+
+  // TODO: handle loading
+
+  const tokens = Array(12)
+    .fill(0)
+    .map((_, i) => i);
+
   return (
     <>
       <Head>
@@ -49,30 +60,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Main>
-        <NavBar connectWallet={connectWallet} />
-        <Title>
-          Own your <span>TEXT</span>.
-        </Title>
+      {showSpline && (
+        <ModelContainer>
+          <Yoda callback={() => setLoading(false)} />
+          <button onClick={handleExplore}>LET'S EXPLORE!</button>
+        </ModelContainer>
+      )}
 
-        <Container>
-          <NftCard
-            tokenId={0}
-            getCount={() => {}}
-            contentId={'QmYFwsqNqqCV7PEMrGwJKfy4wVmM1mZ5Uaamr2CQM2G8rb'}
-          />
-          <NftCard
-            tokenId={1}
-            getCount={() => {}}
-            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
-          />
-          <NftCard
-            tokenId={2}
-            getCount={() => {}}
-            contentId={'QmQdaS4zXrk2yT7LFPWKyYf87Lq1Y3siwerRJdJVAJd8du'}
-          />
-        </Container>
-      </Main>
+      {showMain && (
+        <>
+          <NavBar />
+          <Intro />
+          <NftGallery tokens={tokens} />
+          <Team />
+          <Footer />
+        </>
+      )}
     </>
   );
-}
+};
+
+export default Home;

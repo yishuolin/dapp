@@ -13,11 +13,16 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.6.4",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
+    "@splinetool/react-spline": "^2.2.1",
+    "@splinetool/runtime": "^0.9.57",
     "dotenv": "^16.0.0",
     "hardhat-gas-reporter": "^1.0.8",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-parallax-tilt": "^1.7.34",
+    "react-reveal": "^1.2.2",
+    "react-rotating-text": "^1.4.1",
     "web3": "^1.7.3"
   },
   "devDependencies": {
