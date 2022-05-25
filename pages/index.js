@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { NavBar, Model, Intro, NftGallery, Team, Footer } from '../components';
+import { NavBar, Yoda, Intro, NftGallery, Team, Footer } from '../components';
 
 const ModelContainer = styled.div`
   height: 100vh;
@@ -59,24 +59,23 @@ export default function Home() {
         <meta name="description" content="Dapp Final Project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <>
-        {showSpline && (
-          <ModelContainer>
-            <Model callback={() => setLoading(false)} />
-            <button onClick={handleExplore}>LET'S EXPLORE!</button>
-          </ModelContainer>
-        )}
 
-        {showMain && (
-          <>
-            <NavBar />
-            <Intro />
-            <NftGallery tokens={tokens} />
-            <Team />
-            <Footer />
-          </>
-        )}
-      </>
+      {showSpline && (
+        <ModelContainer>
+          <Yoda callback={() => setLoading(false)} />
+          <button onClick={handleExplore}>LET'S EXPLORE!</button>
+        </ModelContainer>
+      )}
+
+      {showMain && (
+        <>
+          <NavBar />
+          <Intro />
+          <NftGallery tokens={tokens} />
+          <Team />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

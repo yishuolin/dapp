@@ -136,10 +136,10 @@ function NFTCard({ tokenId }) {
     getMintedStatus();
   };
 
-  async function getURI() {
+  const getURI = async () => {
     const uri = await contract.tokenURI(tokenId);
     alert(uri);
-  }
+  };
   return (
     <Tilt tiltEnable={false} scale={1.03}>
       <Card blur={gifURI}>

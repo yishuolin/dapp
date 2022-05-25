@@ -61,8 +61,6 @@ export default function Create() {
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // const textBaseURI = `https://gateway.pinata.cloud/ipfs/`;
-
   const imageRef = useRef();
   const darkTheme = createTheme({
     palette: {
@@ -117,7 +115,7 @@ export default function Create() {
       alert('Please install MetaMask');
       return;
     }
-    alert('Minting...');
+    alert('Comming soon...');
   };
 
   useEffect(() => {
