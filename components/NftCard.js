@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
 import Tilt from 'react-parallax-tilt';
+import PropTypes from 'prop-types';
 import { Button } from '.';
 import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
 import { CONTRACT_ADDRESS } from '../utils';
@@ -185,5 +186,9 @@ function NFTCard({ tokenId }) {
     </Tilt>
   );
 }
+
+NFTCard.propTypes = {
+  tokenId: PropTypes.number.isRequired,
+};
 
 export default NFTCard;

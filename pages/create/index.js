@@ -55,7 +55,7 @@ const Loading = styled.div`
   color: #fff;
 `;
 
-export default function Create() {
+const Create = () => {
   const [words, setWords] = useState([]);
   const [selected, setSelected] = useState([]);
   const [image, setImage] = useState('');
@@ -176,4 +176,6 @@ export default function Create() {
       </Main>
     </ThemeProvider>
   );
-}
+};
+
+export default Create;

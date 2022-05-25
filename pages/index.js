@@ -28,7 +28,7 @@ const ModelContainer = styled.div`
   }
 `;
 
-export default function Home() {
+const Home = () => {
   const [loading, setLoading] = useState(true);
   const [showSpline, setShowSpline] = useState(true);
   const [showMain, setShowMain] = useState(false);
@@ -78,4 +78,6 @@ export default function Home() {
       )}
     </>
   );
-}
+};
+
+export default Home;

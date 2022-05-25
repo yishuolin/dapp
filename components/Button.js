@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const getVariantStyle = {
   outlined: `
@@ -57,6 +58,12 @@ const StyledButton = styled.button`
 
 const Button = ({ children, ...props }) => {
   return <StyledButton {...props}>{children}</StyledButton>;
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['outlined', 'filled', 'semiTransparent']),
+  glowOnHover: PropTypes.bool,
 };
 
 export default Button;
