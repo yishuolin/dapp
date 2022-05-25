@@ -64,7 +64,7 @@ const Intro = () => {
           NFTs <br></br>for Decentralized <br></br>Generative Art
         </Title>
         <Subtitle>
-          <GlowWithGradient>The Text</GlowWithGradient> is a collection of 1000
+          <GlowWithGradient>The TEXT</GlowWithGradient> is a collection of 1000
           NFTs representing 1000 text. Mint one to creat beautiful artwork by
           AI.
         </Subtitle>
