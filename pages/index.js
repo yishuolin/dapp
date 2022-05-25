@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { NavBar, Model, Intro, NftGallery, Team, Footer } from '../components';
 
@@ -9,7 +9,7 @@ const ModelContainer = styled.div`
     font-weight: bold;
     position: absolute;
     top: 90%;
-    left: calc(50% - 80px);
+    left: calc(50% - 110px);
     color: #fff;
     font-size: 18px;
     padding: 12px 32px;

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { NavBar, Button } from '../../components';
-import { CONTRACT_ADDRESS } from '../../utils';
+import { CONTRACT_ADDRESS, formatSentence, createArt } from '../../utils';
 import MyNFT from '../../artifacts/contracts/nft.sol/MyToken.json';
 
 const Main = styled.div`
@@ -69,22 +69,13 @@ export default function Create() {
       mode: 'dark',
     },
   });
-  const getImage = () => {
-    // TODO: need to check if the selected words are valid again
+  const getImage = async () => {
+    // TODO: need to check if the selected words are valid
     setLoading(true);
-    // TODO: move to requests.js
-    const url = 'https://source.unsplash.com/random/400x300';
-    fetch(url)
-      .then((res) => res.blob())
-      .then((blob) => {
-        let objectURL = URL.createObjectURL(blob);
-        setImage(objectURL);
-        setLoading(false);
-      });
-  };
-
-  const formatSentence = (selected) => {
-    return selected.map((word) => word.split('-')[0]).join(' ');
+    await createArt(selected, (img) => {
+      setImage(img);
+      setLoading(false);
+    });
   };
 
   const updateSelected = (e, newSelected) => {
