@@ -65,7 +65,7 @@ const Intro = () => {
         </Title>
         <Subtitle>
           <GlowWithGradient>The TEXT</GlowWithGradient> is a collection of 1000
-          NFTs representing 1000 text. Mint one to creat beautiful artwork by
+          NFTs representing 1000 text. Mint one to create beautiful artwork by
           AI.
         </Subtitle>
       </Description>

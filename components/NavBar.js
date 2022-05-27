@@ -6,14 +6,17 @@ import { useWalletStatus } from '../hooks';
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  width: 97%;
   // z-index: 20;
   margin: 0 auto;
   justify-content: space-between;
   // position: fixed;
   // background: #000;
-  div button {
+  div {
     margin: 1.5rem 1rem;
+  }
+  button {
+    margin-right: 1.3rem;
   }
 `;
 
