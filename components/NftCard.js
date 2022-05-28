@@ -129,8 +129,18 @@ function NFTCard({ tokenId }) {
       method: 'eth_requestAccounts',
     });
     const walletAddr = accounts[0];
+    const balance = await window.ethereum.request({
+      method: 'eth_getBalance',
+      params: [walletAddr, 'latest'],
+    });
+    const { price } = metadata;
+    if (balance.result < price) {
+      alert(`You need to have at least ${price} ETH in your wallet`);
+      return;
+    }
+    // TODO: should also check price in the contract
     const result = await contract.payToMint(walletAddr, metadataURI, {
-      value: ethers.utils.parseEther('0.05'),
+      value: ethers.utils.parseEther(price.toString()),
     });
 
     await result.wait();
@@ -155,7 +165,7 @@ function NFTCard({ tokenId }) {
             <Content>
               <Price>
                 <img src="/img/eth.png" />
-                0.05
+                {metadata.price?.toFixed(2)}
               </Price>
             </Content>
           </div>

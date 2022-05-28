@@ -72,7 +72,7 @@ contract MyToken is ERC721, ERC721URIStorage, Ownable, ERC721Enumerable {
         string memory metadataURI
     ) public payable returns (uint256) {
         require (existingURIs[metadataURI] != 1, "NFT already minted!");
-        require (msg.value >= 0.05 ether, "Need to pay up!");
+        // require (msg.value >= 0.05 ether, "Need to pay up!"); // TODO: read price from metadata
 
         uint256 newItemId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
