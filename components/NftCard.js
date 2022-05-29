@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ethers } from 'ethers';
 import styled from '@emotion/styled';
 import Tilt from 'react-parallax-tilt';
@@ -8,10 +8,10 @@ import MyNFT from '../artifacts/contracts/nft.sol/MyToken.json';
 import { CONTRACT_ADDRESS } from '../utils';
 
 const Card = styled.div`
+  height: 350px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 10px;
   border-radius: 10px;
   position: relative;
@@ -62,7 +62,7 @@ const Price = styled.div`
 `;
 
 const Title = styled.h5`
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 500;
   margin: 0;
   margin-bottom: 0.5rem;
@@ -91,11 +91,14 @@ const ButtonsContainer = styled.div`
 
 function NFTCard({ tokenId }) {
   const gifURI = `/gif/${tokenId}.gif`;
+  const mp4Uri = `/mp4/${tokenId}.mp4`;
   const metadataURI = `/metadata/${tokenId}.json`;
 
   const [contract, setContract] = useState();
   const [isMinted, setIsMinted] = useState(false);
   const [metadata, setMetadata] = useState({});
+
+  const videoRef = useRef();
 
   useEffect(() => {
     getMintedStatus();
@@ -151,10 +154,29 @@ function NFTCard({ tokenId }) {
     const uri = await contract.tokenURI(tokenId);
     alert(uri);
   };
+
+  const playVideo = () => {
+    videoRef.current.play();
+  };
+  const pauseVideo = () => {
+    videoRef.current.pause();
+  };
+
   return (
     <Tilt tiltEnable={false} scale={1.03}>
       <Card blur={gifURI}>
-        <img src={gifURI} alt="gif" style={{ borderRadius: '8px' }} />
+        {/* <img
+          src={gifURI}
+          alt="gif"
+          style={{ borderRadius: '8px', height: '150px' }}
+        /> */}
+        <video
+          ref={videoRef}
+          loop
+          style={{ borderRadius: '8px', height: '150px', zIndex: '2' }}
+          src={mp4Uri}
+          onMouseOver={playVideo}
+          onMouseOut={pauseVideo}></video>
         <Description>
           <div>
             <Title>{`#${tokenId}`}</Title>

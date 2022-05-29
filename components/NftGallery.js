@@ -57,7 +57,7 @@ const NftGallery = ({ tokens }) => {
       </Title>
       <Container>
         {tokens.map((tokenId) => (
-          <NftCard key={tokenId} tokenId={tokenId % 3} />
+          <NftCard key={tokenId} tokenId={tokenId % 4} />
         ))}
       </Container>
     </>
