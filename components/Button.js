@@ -45,7 +45,6 @@ const StyledButton = styled.button`
       `
         background-color: rgba(82, 76, 209, 0.5);
         border: 1px solid rgba(82, 76, 209, 0.7);
-        color: rgba(255, 255, 255, 0.9);
       `}
   }
   transition: all 0.3s ease;

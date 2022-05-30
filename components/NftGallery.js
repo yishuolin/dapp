@@ -35,12 +35,12 @@ const GlowWithGradient = styled.span`
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   width: 65%;
   margin: 0 auto;
   flex-wrap: wrap;
   > div {
-    margin-top: 30px;
+    margin: 30px 10px 0 10px;
   }
 `;
 
