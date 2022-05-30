@@ -26,7 +26,8 @@ const MembersContainer = styled.div`
 `;
 
 const Member = styled.div`
-  width: 30%;
+  width: 50%;
+  margin: 0 20px;
   img {
     width: 100%;
     border-radius: 12px;
