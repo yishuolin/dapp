@@ -33,11 +33,13 @@ const Card = styled.div`
     content: '';
     background: url(${props.blur}) no-repeat;
     background-size: cover;
-    height: 100%;
-    width: 100%;
+    height: 120%;
+    width: 120%;
     position: absolute;
-    filter: blur(96px);
-    -webkit-filter: blur(96px);
+    left: -10px;
+    top: -10px;
+    filter: blur(120px);
+    -webkit-filter: blur(120px);
     `}
   }
 `;
@@ -187,7 +189,7 @@ function NFTCard({ tokenId }) {
             <Content>
               <Price>
                 <img src="/img/eth.png" />
-                {metadata.price?.toFixed(2)}
+                {metadata.price?.toFixed(3)}
               </Price>
             </Content>
           </div>

@@ -48,7 +48,7 @@ const Home = () => {
 
   // TODO: handle loading
 
-  const tokens = Array(12)
+  const tokens = Array(14)
     .fill(0)
     .map((_, i) => i);
 
