@@ -1,5 +1,6 @@
 # The TEXT
-The TEXT is a collection of 1000 NFTs representing 1000 text. This repository includes the frontend and a smart contract that allows you to mint and interact with the NFTs. (Final project for NTU Decentralized Applications Design and Practice 2022)
+The TEXT is a collection of 1000 NFTs representing 1000 text. This repository includes the frontend and a smart contract that allows you to mint and interact with the NFTs. (Final project for NTU Decentralized Applications Design and Practice 2022, [Demo](
+https://www.youtube.com/watch?v=xbC_MZlIjys))
 
 ![image](https://i.imgur.com/8mSUKnj.png)
 
@@ -16,7 +17,12 @@ npx hardhat node
 ```
 npx hardhat run .\scripts\deploy.js --network localhost
 ```
-4. Start the dev server
+4. Set up the backend url as an environment variable
+```
+mkdir .env.local
+echo "BACKEND_BASE_URL=YOUR_BACKEND_URL" > .env.local
+```
+5. Start the dev server
 ```
 npm run dev
 ```
