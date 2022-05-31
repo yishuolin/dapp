@@ -1,5 +1,4 @@
 const CONTRACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const BACKEND_BASE_URL = 'http://localhost:5001';
 const MEMBERS = [
   {
     name: 'Yi-Shuo Lin',
@@ -18,4 +17,4 @@ const MEMBERS = [
   },
 ];
 
-export { CONTRACT_ADDRESS, BACKEND_BASE_URL, MEMBERS };
+export { CONTRACT_ADDRESS, MEMBERS };

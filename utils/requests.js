@@ -1,5 +1,4 @@
 import { formatSentence } from './helpers';
-import { BACKEND_BASE_URL } from './constants';
 
 const connectWallet = async () => {
   if (!window || !window.ethereum) {
@@ -14,7 +13,9 @@ const connectWallet = async () => {
 };
 
 const createArt = async (selected, callback) => {
-  const url = `${BACKEND_BASE_URL}/text2img/${formatSentence(selected)}`;
+  const url = `${process.env.BACKEND_BASE_URL}/text2img/${formatSentence(
+    selected,
+  )}?sr=2`;
   fetch(url)
     .then((res) => res.blob())
     .then((blob) => {
